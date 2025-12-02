@@ -20,38 +20,42 @@ namespace ConsoleApp3
                 Console.WriteLine("Что хотите сделать?");
                 Console.WriteLine("1.Создать студента");
                 Console.WriteLine("2.Вывести список со студентами ");
-                Console.WriteLine("3. Выйти из программы ");
                 Console.WriteLine("6. Выйти из программы ");
                 int input = Convert.ToInt32(Console.ReadLine());
                 switch (input)
                 {
+                    //Создание студента
                     case 1:
+                        //========= выделямем память под студента
                         string name;
                         string lastname;
                         double mark;
                         int id;
+                        //=========
+
+                        //=========Обработка ввода пользователя
                         Console.WriteLine("Имя");
                         name = Console.ReadLine();
+                        if (!Validator.validation(name, false)) return;
                         Console.WriteLine("Фамилия");
                         lastname = Console.ReadLine();
-                        id = Convert.ToInt32(Console.ReadLine());
+                        if (!Validator.validation(lastname, false)) return;
+                        Console.WriteLine("Введите айди");
+                        string _id = Console.ReadLine();
+                        if (!Validator.validation(_id, true)) return;
+                        id = Convert.ToInt32(_id);
+                        Console.WriteLine("Введите средний балл");
                         mark = Convert.ToDouble(Console.ReadLine());
+                        //=========
+
                         Student student = new Student(name, lastname, id, mark);
                         students.Add(student);
                         break;
+                        //Вывод списка студента
                     case 2:
                         PrintAllStudents(students);
                         break;
-                    case 3:
-                        Console.WriteLine("Введите фамилию");
-                        if (SearchByLastName(students)){
-                            Console.WriteLine("Студент есть в списке");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Студент нету в списке");
-                        }
-                            break;
+                        //Выход из программы
                     case 6:
                         Console.WriteLine("Выхожу из программы");
                         exit = true;
